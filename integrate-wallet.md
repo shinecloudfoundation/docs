@@ -1,14 +1,19 @@
+# 安装全节点
+### 准备工作
+准备一台2核(最好4核)，4G内存，初始硬盘200G(以后每年100G递增)的机器，安装好ubuntu linux 18.04系统（必须，不可以用别的版本）
+### 执行脚本
+`wget https://raw.githubusercontent.com/shinecloudfoundation/shinecloudnet-deploy/master/mainnet/fullnode/deploy.sh -O deploy.sh && sh deploy.sh myScloudNode 0.01uscds v1.2.0`
+
 # 安装轻节点
 ### 获取安装程序
 下载地址：
 `https://github.com/shinecloudfoundation/shinecloudnet-binary/raw/master/shinecloudnet-mainnet/binary/v1.2.0/scloudcli`
 
 ### 启动
-`nohup ./scloudcli rest-server --chain-id shinecloudnet --trust-node --node 18.180.156.157:26657 --laddr tcp://0.0.0.0:1317 > lcd.log 2>&1 &`
+`nohup ./scloudcli rest-server --chain-id shinecloudnet --trust-node --node [全节点IP]:26657 --laddr tcp://0.0.0.0:1317 > lcd.log 2>&1 &`
 
 > 1. `--chain-id shinecloudnet` 指定接入的网络chain-id
-> 2. `--laddr tcp://0.0.0.0:1317` 参数指定绑定当前轻节点服务器的公共IP，`0.0.0.0`代表可以被其它机器访问，假如想要只能本机程序来访问，需要改成`127.0.0.1`。
-> 3. `--trust-node --node 23.89.67.176:26657` 是接入SCDS正式网络的入口IP
+> 2. `--laddr tcp://0.0.0.0:1317` 参数指定绑定当前轻节点服务器的公共IP，`0.0.0.0`代表RPC接口可以被其它机器访问，假如希望RPC接口只能本机程序来访问，需要改成`127.0.0.1`。
 > 
 **注意事项**
 
