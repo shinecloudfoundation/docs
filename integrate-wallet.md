@@ -458,6 +458,73 @@
 >需要关注的字段与`/txs/{hash}`接口相同
 >
 
+## 8. 获取最新块信息
+**接口名称：** `/blocks_results/latest`
+
+**执行示例：**
+`curl -X GET "http://{轻节点IP}:1317/blocks_results/latest" -H  "accept: application/json"`
+>解释信息见下一条
+>
+
+## 9. 根据块高度，查询块信息
+**接口名称：** `/blocks_results/{height}`
+
+**执行示例：**
+`curl -X GET "http://{轻节点IP}:1317/blocks_results/1000" -H  "accept: application/json"`
+
+**返回内容：**
+```
+{
+  "height": "5339054",
+  "results": {
+    "deliver_tx": [
+      {
+        "log": "[{\"msg_index\":0,\"success\":true,\"log\":\"\"}]",
+        "gas_wanted": "100000",
+        "gas_used": "40569",
+        "events": [
+          {
+            "type": "message",
+            "attributes": [
+              {
+                "key": "action",
+                "value": "send"
+              },
+              {
+                "key": "sender",
+                "value": "scloud1qg7xe8azyhvjkvxnh9seqqcp2wvm2qk0zr7ej0"
+              },
+              {
+                "key": "module",
+                "value": "bank"
+              }
+            ]
+          },
+          {
+            "type": "transfer",
+            "attributes": [
+              {
+                "key": "recipient",
+                "value": "scloud1eg83rfelg0auqrxkncesjtk05zqf7l3mwxpv7y"
+              },
+              {
+                "key": "amount",
+                "value": "49000000uscds"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "end_block": {
+    },
+    "begin_block": {
+    }
+  }
+}
+```
+>deliver_tx字段是一个数组字段，包含了当前block里的所有tx记录
+
 ## 8. 给定高度值，查询整个区块的的所有数据：
 **接口名称：** `/blocks_results/{height}`
 
