@@ -463,69 +463,10 @@
 
 **执行示例：**
 `curl -X GET "http://{轻节点IP}:1317/blocks_results/latest" -H  "accept: application/json"`
->解释信息见下一条
+>返回值结构与`/blocks_results/{height}`相同
 >
 
-## 9. 根据块高度，查询块信息
-**接口名称：** `/blocks_results/{height}`
-
-**执行示例：**
-`curl -X GET "http://{轻节点IP}:1317/blocks_results/1000" -H  "accept: application/json"`
-
-**返回内容：**
-```
-{
-  "height": "5339054",
-  "results": {
-    "deliver_tx": [
-      {
-        "log": "[{\"msg_index\":0,\"success\":true,\"log\":\"\"}]",
-        "gas_wanted": "100000",
-        "gas_used": "40569",
-        "events": [
-          {
-            "type": "message",
-            "attributes": [
-              {
-                "key": "action",
-                "value": "send"
-              },
-              {
-                "key": "sender",
-                "value": "scloud1qg7xe8azyhvjkvxnh9seqqcp2wvm2qk0zr7ej0"
-              },
-              {
-                "key": "module",
-                "value": "bank"
-              }
-            ]
-          },
-          {
-            "type": "transfer",
-            "attributes": [
-              {
-                "key": "recipient",
-                "value": "scloud1eg83rfelg0auqrxkncesjtk05zqf7l3mwxpv7y"
-              },
-              {
-                "key": "amount",
-                "value": "49000000uscds"
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "end_block": {
-    },
-    "begin_block": {
-    }
-  }
-}
-```
->deliver_tx字段是一个数组字段，包含了当前block里的所有tx记录
-
-## 10. 给定高度值，查询整个区块的的所有数据：
+## 9. 给定高度值，查询整个区块的的所有数据：
 **接口名称：** `/blocks_results/{height}`
 
 **执行示例：**
@@ -579,7 +520,7 @@
   }
 }
 ```
-> a. 输出内容太多，删除了对集成没有价值的信息，目前这个结构里，只需要关心deliver_tx数组里面的记录，每个数组项是一个交易记录，然后再查看events里的数据，通过type=message 与 type=transfer来判定转出方、转入方、转账数额；
+> a. 输出内容太多，删除了对集成没有价值的信息，目前这个结构里，只需要关心deliver_tx字段，包含了当前block里的所有tx记录，deliver_tx字段是一个数组字段，每个数组项是一个交易记录，然后再查看events里的数据，通过type=message 与 type=transfer来判定转出方、转入方、转账数额；
 
 > b. 在应用层，通过一个定时程序，区块链网络大约每5.5秒出一个新块，所以应用程序可以每5.5秒调用一下这个接口，分析好数据，在应用层重建一个交易数据库。然后在应用层程序里，可以通过查看这个交易数据库，来判断一个交易是否成功；
 
