@@ -470,7 +470,7 @@
 **接口名称：** `/blocks_results/{height}`
 
 **执行示例：**
-`curl -X GET "http://{轻节点IP}:1317//blocks_results/12165" -H  "accept: application/json"`
+`curl -X GET "http://{轻节点IP}:1317/blocks_results/12165" -H  "accept: application/json"`
 
 **输出内容：**
 ```
